@@ -1,0 +1,9 @@
+name: output-metadata
+on: issues
+jobs:
+  output-events:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: output context
+        run: echo "${{ toJSON(github) }}"
+      

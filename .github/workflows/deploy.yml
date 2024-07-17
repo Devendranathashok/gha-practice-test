@@ -1,0 +1,43 @@
+name: github-actions-2
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v3
+      - name: install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: lint
+        run: npm lint
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v3
+      - name: install node js
+        uses: actions@setup-node@v3
+        with:
+          node-version: 18
+      - name: test
+        run: npm test
+  build: 
+    runs-on: ubuntu-22.04 
+    steps: 
+    - name: checkout the code
+      uses: actions/checkout@v3
+    - name: node setup
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: build
+      run: npm build      
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: deploy
+        run: echo "deploying "
+      - name: status
+        run: echo "deployed"   
