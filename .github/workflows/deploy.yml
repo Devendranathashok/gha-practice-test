@@ -10,11 +10,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: ci
+        run: npm ci    
       - name: lint
-        run: npm lint
+        run: npm run lint
   test:
+    needs: lint 
     runs-on: ubuntu-22.04
-    steps:
+    steps:   
       - name: checkout the code
         uses: actions/checkout@v3
       - name: install node js
@@ -22,8 +25,9 @@ jobs:
         with:
           node-version: 18
       - name: test
-        run: npm test
+        run: npm run test
   build: 
+    needs: test
     runs-on: ubuntu-22.04 
     steps: 
     - name: checkout the code
@@ -33,8 +37,9 @@ jobs:
       with:
         node-version: 18
     - name: build
-      run: npm build      
+      run: npm run build      
   deploy:
+    needs: build
     runs-on: ubuntu-22.04
     steps:
       - name: deploy
